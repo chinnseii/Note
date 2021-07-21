@@ -9,6 +9,8 @@
 
 前端小白，设计小白，
 登录界面仿知乎，主页仿b站。
-技术栈：springboot mybatis mysql jquery 
+技术栈：springboot mybatis mysql jquery
+边敲边学习，学啥用啥。
 
 2021/7/21 登录注册功能
+
