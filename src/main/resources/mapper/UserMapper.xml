@@ -2,15 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.note.dao.UserMapper">
   <resultMap id="NoteUserMap" type="com.cloud.note.entity.User">
-    <result column="USER_MOBILE" jdbcType="VARCHAR" property="userMobile" />
+    <id  column="USER_MOBILE" jdbcType="VARCHAR" property="userMobile" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="userPassword" />
     <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
     <result column="LOCK_FLG" jdbcType="VARCHAR" property="lockedFlg" />
     <result column="CREATE_TIME" jdbcType="VARCHAR" property="creatTime" />
     <result column="LOGIN_TIME" jdbcType="VARCHAR" property="loginTime" />
     <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
-    <result column="USER_LEVEL" jdbcType="VARCHAR" property="level" />
-    <result column="EXP" jdbcType="VARCHAR" property="exp" />
   </resultMap>
 
   <sql id="Column_List">
@@ -20,9 +18,7 @@
     LOCK_FLG,
     CREATE_TIME,
     LOGIN_TIME,
-    UPDATE_TIME,
-    USER_LEVEL,
-    EXP
+    UPDATE_TIME
   </sql>
 
   <select id="checkMobile" parameterType="java.lang.String" resultType="int">
@@ -35,16 +31,13 @@
     PASSWORD,
     NICK_NAME,
     CREATE_TIME,
-    LOCK_FLG,
-    USER_LEVEL,
-    EXP)
+    LOCK_FLG
+    )
   VALUES (
     #{userMobile,jdbcType=VARCHAR}, 
     #{userPassword,jdbcType=VARCHAR},
     #{nickName,jdbcType=VARCHAR},
     date_format(now(),'%Y%m%d%H%i%s'),
-    '0',
-    '1',
     '0')
 </insert>
 

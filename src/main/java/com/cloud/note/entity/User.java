@@ -15,9 +15,6 @@ public class User {
 
     private String updateTime;
 
-    private String level;
-
-    private String exp;
 
     public String getUserMobile() {
         return userMobile;
@@ -64,22 +61,6 @@ public class User {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getExp() {
-        return exp;
-    }
-
-    public void setExp(String exp) {
-        this.exp = exp;
     }
 
     public String getLoginTime() {

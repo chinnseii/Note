@@ -18,18 +18,6 @@
             <!-- 左部分 -->
             <div class="content_left">
                 <div class="logo"><a href=""><img src="/img/lanbitou_logo.png" alt=""></a></div>
-                <div class="left_nav">
-                    <ul>
-                        <li><a href="">主站<img class="one" src="img/downpoint.png" alt=""></a></li>
-                        <li><a href="">&nbsp&nbsp&nbsp番剧</a></li>
-                        <li><a href="">游戏中心</a></li>
-                        <li><a href="">直播</a></li>
-                        <li><a href="">会员购</a></li>
-                        <li><a href="">漫画</a></li>
-                        <li><a href="">赛事</a></li>
-                        <li><a href=""><img class="eight" src="img/mobile.png" alt=""> &nbsp&nbsp 下载APP</a></li>
-                    </ul>
-                </div>
             </div>
             <!-- 中部搜索框 -->
             <div class="content_mid">
@@ -76,7 +64,7 @@
                     <a href=""></a>
                 </div>
                 <div class="umr_word">
-                    <input type="text" placeholder="编辑个性签名">
+                    <input type="text" placeholder="個人説明を編集してください。" th:value="${ session.signature }">
                 </div>
             </div>
         </div>
@@ -101,18 +89,18 @@
             <div class="unr_fans">
                 <a href="">
                     <p class="up">关注数</p>
-                    <p class="down">10</p>
+                    <p class="down" th:text="${session.follow}"></p>
                 </a>
             </div>
             <div class="unr_fans">
                 <a href="">
                     <p class="up">粉丝数</p>
-                    <p class="down">101</p>
+                    <p class="down" th:text="${session.fan}"></p>
                 </a>
             </div>
             <div class="unr_fans">
                 <p class="up">获赞数</p>
-                <p class="down">233</p>
+                <p class="down" th:text="${session.star}"></p>
             </div>
             <div class="unr_fans">
                 <p class="up">播放数</p>

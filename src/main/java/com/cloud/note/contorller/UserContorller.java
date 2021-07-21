@@ -16,6 +16,9 @@ public class UserContorller {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserInfoContorller userInfoContorller;
+
     @PostMapping(value = "/register")
     public String register(@RequestParam("userNickName") String userNickName,
             @RequestParam("userMobile") String userMobile, @RequestParam("userPassword") String userPassword,
@@ -35,8 +38,13 @@ public class UserContorller {
         if (checkExits == 0) {
             int result = userService.insert(userNickName, userMobile, userPassword);
             if (result != 0) {
+                if(userInfoContorller.initUserInfo(userMobile)!=1){
+                    session.setAttribute("registerErrorMsg", "アカウント初期化失敗しました。");
+                    session.setMaxInactiveInterval(1);
+                    return "/register";
+                }               
                 // 新規登録成功の場合、ログイン処理を開始します。
-                login(userMobile, userPassword, session);
+                login(userMobile, userPassword, session);              
                 return "redirect:/index";
             } else {
                 session.setAttribute("registerErrorMsg", "新規登録失敗しました。");
@@ -81,12 +89,12 @@ public class UserContorller {
         } else {
             // ロックフラグをリラン
             userService.updateLockFlg(userMobile, 0);
-            // ログイン成功の場合session有効期限は２時間に設定
+            // ログイン成功の場合session有効期限は２時間に設定           
             session.setMaxInactiveInterval(60 * 60 * 2);
             session.setAttribute("loginErrorMsg", "");
+            session.setAttribute("userMobile", userMobile);
+            userInfoContorller.getUserInfo(session);
             session.setAttribute("nickName",user.getNickName());
-            session.setAttribute("level",user.getLevel());
-            session.setAttribute("exp",user.getExp());
             return "redirect:/index";
         }
     }

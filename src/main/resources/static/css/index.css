@@ -24,10 +24,11 @@ body {
     align-items: flex-start;
     justify-content: space-between;
     background-color: #f7fafc;
+    width:100%;
 }
 
 .header .header_content .content_left {
-    min-width: 500px;
+    min-width: 75px;
 }
 
 .header .header_content .content_left .logo {
