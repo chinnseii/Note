@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-07-21 10:53:11
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-07-27 15:16:45
+ * @FilePath: \note\src\main\java\com\cloud\note\service\impl\UserInfoServiceImpl.java
+ */
 package com.cloud.note.service.impl;
 
 import javax.servlet.http.HttpSession;
@@ -20,20 +26,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public void getUserInfo(HttpSession session) {
-        String userMobile = (String) session.getAttribute("userMobile");
+    public void getUserInfo(String userMobile) {
         UserInfo userInfo = userInfoMapper.getUserInfo(userMobile);
-        if(userInfo!=null){
-            session.setAttribute("profilephoto", userInfo.getProfilePhoto());
-            session.setAttribute("signature", userInfo.getSignature());
-            session.setAttribute("follow", userInfo.getFollow());
-            session.setAttribute("fan", userInfo.getFan());
-            session.setAttribute("star", userInfo.getStar());
-            session.setAttribute("level", userInfo.getLevel());
-            session.setAttribute("exp", userInfo.getExp());
-        }else{
-            session.setAttribute("loginErrorMsg","ユーザー情報を取得失敗しました。");
-        }
+       
        
     }
 

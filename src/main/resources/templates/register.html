@@ -36,7 +36,7 @@
 					<input type="password" placeholder="密码(不少于6位)" class="psd required" id="psd" name="userPassword" />
 				</li>
 			</ul>
-			<span class="result" th:text="${ session.registerErrorMsg }" style="color: red;height: 25px;line-height: 40px;
+			<span class="result" th:text="${registerErrorMsg}" style="color: red;height: 25px;line-height: 40px;
 			font-size: 15px;"></span>
 			<button type="submit" class="submit_btn" id="btnSubmit" onclick="sendSubmit()">注册烂笔头</button>
 			<span class="agreement-tip">点击「注册」按钮，即代表你同意<a href="javascript:;">《烂笔头协议》</a></span>

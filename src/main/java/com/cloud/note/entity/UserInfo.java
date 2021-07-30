@@ -1,5 +1,16 @@
+/*
+ * @Date: 2021-07-21 09:23:19
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-07-30 13:03:59
+ * @FilePath: \note\src\main\java\com\cloud\note\entity\UserInfo.java
+ */
 package com.cloud.note.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class UserInfo {
 
     private String userMobile;
@@ -11,59 +22,5 @@ public class UserInfo {
     private String level;
     private String exp;
     private String updateTime;
-    
-    public String getUserMobile() {
-        return userMobile;
-    }
-    public void setUserMobile(String userMobile) {
-        this.userMobile = userMobile;
-    }
-    public String getProfilePhoto() {
-        return profilePhoto;
-    }
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
-    public String getSignature() {
-        return signature;
-    }
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-    public String getFollow() {
-        return follow;
-    }
-    public void setFollow(String follow) {
-        this.follow = follow;
-    }
-    public String getFan() {
-        return fan;
-    }
-    public void setFan(String fan) {
-        this.fan = fan;
-    }
-    public String getStar() {
-        return star;
-    }
-    public void setStar(String star) {
-        this.star = star;
-    }
-    public String getLevel() {
-        return level;
-    }
-    public void setLevel(String level) {
-        this.level = level;
-    }
-    public String getExp() {
-        return exp;
-    }
-    public void setExp(String exp) {
-        this.exp = exp;
-    }
-    public String getUpdateTime() {
-        return updateTime;
-    }
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
+
 }

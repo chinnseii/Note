@@ -1,5 +1,16 @@
+/*
+ * @Date: 2021-07-15 16:24:24
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-07-30 13:03:39
+ * @FilePath: \note\src\main\java\com\cloud\note\entity\User.java
+ */
 package com.cloud.note.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class User {
     private String userMobile;
 
@@ -15,62 +26,4 @@ public class User {
 
     private String updateTime;
 
-
-    public String getUserMobile() {
-        return userMobile;
-    }
-
-    public void setUserMobile(String userMobile) {
-        this.userMobile = userMobile;
-    }
-
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getLockedFlg() {
-        return lockedFlg;
-    }
-
-    public void setLockedFlg(String lockedFlg) {
-        this.lockedFlg = lockedFlg;
-    }
-
-    public String getCreatTime() {
-        return creatTime;
-    }
-
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
-    }
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(String loginTime) {
-        this.loginTime = loginTime;
-    }
-
-
-   
 }

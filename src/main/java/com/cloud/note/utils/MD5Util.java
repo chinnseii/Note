@@ -1,12 +1,20 @@
+/*
+ * @Date: 2021-07-15 16:24:24
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-07-28 15:34:42
+ */
 package com.cloud.note.utils;
 import java.security.MessageDigest;
 
+import org.springframework.stereotype.Component;
+
+
 /**
- * @author 13
- * @qq交流群 796794009
- * @email 2449207463@qq.com
- * @link https://github.com/newbee-ltd
+ * @description: MD5加密
+ * @param {*}
+ * @return {*}
  */
+@Component
 public class MD5Util {
 
     private static String byteArrayToHexString(byte b[]) {

@@ -52,7 +52,7 @@
   </update>
 
   <update id="updateLock" parameterType="java.lang.String">
-    UPDATE NOTE_USER SET LOCK_FLG=LOCK_FLG + 1 WHERE USER_MOBILE = #{userMobile, jdbcType = VARCHAR}
+    UPDATE NOTE_USER SET LOCK_FLG=LOCK_FLG + 1 WHERE USER_MOBILE = #{userMobile, jdbcType = VARCHAR} AND LOCK_FLG &lt; 5
   </update>
 
 
