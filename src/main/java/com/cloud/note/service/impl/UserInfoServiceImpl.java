@@ -1,12 +1,11 @@
 /*
  * @Date: 2021-07-21 10:53:11
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-07-27 15:16:45
+ * @LastEditTime: 2021-08-04 15:27:15
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\UserInfoServiceImpl.java
  */
 package com.cloud.note.service.impl;
 
-import javax.servlet.http.HttpSession;
 
 import com.cloud.note.dao.UserInfoMapper;
 import com.cloud.note.entity.UserInfo;
@@ -26,10 +25,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public void getUserInfo(String userMobile) {
-        UserInfo userInfo = userInfoMapper.getUserInfo(userMobile);
-       
-       
+    public UserInfo getUserInfo(String userMobile) {    
+        return  userInfoMapper.getUserInfo(userMobile);
     }
 
 }

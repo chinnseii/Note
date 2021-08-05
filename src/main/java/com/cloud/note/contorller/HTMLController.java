@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-07-15 16:24:23
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-08-04 17:42:02
+ * @FilePath: \note\src\main\java\com\cloud\note\contorller\HTMLController.java
+ */
 package com.cloud.note.contorller;
 
 
@@ -12,10 +18,10 @@ public class HTMLController {
     }
     @RequestMapping("register")
     public String register() {
-        return "register";   //注意：通过thymeleaf访问的界面不应添加后缀
+        return "register";   
     }
     @RequestMapping("index")
     public String index() {
-        return "index";   //注意：通过thymeleaf访问的界面不应添加后缀
+        return "index";   
     }
 }

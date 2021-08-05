@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/favicon.ico" type="images/x-ico">
     <link href="/css/index.css" rel="stylesheet">
-    <title th:text="${session.nickName}"></title>
+    <title th:text="${nickName}"></title>
     <style>
     </style>
 </head>
 
 <body>
     <!-- headを導入 -->
-    <div th:include="include :: header"></div>
+    <div th:insert="include :: header"></div>
 
     <!-- 底部信息区 -->
     <div class="message_content">
@@ -130,13 +130,48 @@
 <script src="/libs/jquery-1.12.4/jquery.min.js"></script>
 <script>
     $(function () {
-        localStorage.setItem("token","[[${token}]]");
-        $.ajax({
-            url: "/updateUserInfo", 
-            type:"POST",
-            success: function (result) {
-            }
-        });
+        if ("[[${token}]]".length != 0) {
+            localStorage.setItem("token", "[[${token}]]");
+        }
+        if ("[[${userMobile}]]".length != 0) {
+            localStorage.setItem("userMobile", "[[${userMobile}]]");
+        }
+        if ("[[${nickName}]]".length != 0) {
+            localStorage.setItem("nickName", "[[${nickName}]]");
+        }
+       if($("#nickName").text()==0){
+        $("#nickName").append(localStorage.getItem("nickName"));
+       } 
+        if (localStorage.getItem("token") == undefined || localStorage.getItem("userMobile") == undefined) {
+            window.location.href = "login";
+        } else {
+            var headerObject = new Object();
+            headerObject.token = localStorage.getItem("token");
+            headerObject.userMobile = localStorage.getItem("userMobile");
+            var headerInfo = JSON.stringify(headerObject);
+            $.ajax({
+                type: "POST",
+                url: "/getUserInfo",
+                beforeSend: function (request) {
+                    request.setRequestHeader("header", headerInfo);
+                },
+                data: {
+                    'userMobile': localStorage.getItem("userMobile"),
+                },
+                success: function (result) {
+                    if (result.errorMsg != undefined) {
+                        window.location.href = "login?errorMsg=" + result.errorMsg;
+                    } else {
+                        $("#fan").append(result.fan);
+                        $("#follow").append(result.follow);
+                        $("#star").append(result.star);
+                        $("#level").append(result.level);
+                        $("#signature").append(result.signature);
+                        $(".profilephoto").attr("src", "profilephoto/"+result.profilePhoto);
+                    }
+                }
+            });
+        }
     })
 </script>
 

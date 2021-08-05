@@ -15,7 +15,7 @@
 	<div id="wrapper">
 		<div>
 			<img src="/img/lanbitou_logo.png" />
-			<h2>记录你职场成长中的点滴</h2>
+			<h2>做着玩玩的，这里随便写</h2>
 		</div>
 		<nav class="switch_nav">
 			<a href="register" id="switch_signup" class="switch_btn">新規登録</a>
@@ -105,6 +105,10 @@
 	</script>
 	<script>
 		$(function () {
+			var errorMsg = getQuery("errorMsg")
+			if (errorMsg.length != 0) {
+				alert(errorMsg);
+			}
 			$("#mobile").val(sessionStorage.getItem("loginMobile"));
 			$("#psd").val(sessionStorage.getItem("loginPsd"));
 			//为表单元素添加失去焦点事件
@@ -146,8 +150,8 @@
 
 			//点击重置按钮时，通过trigger()来触发文本框的失去焦点事件
 			$("#btnSubmit").click(function () {
-			   sessionStorage.setItem("loginMobile", $("#mobile").val());
-			   sessionStorage.setItem("loginPsd", $("#psd").val());   
+				sessionStorage.setItem("loginMobile", $("#mobile").val());
+				sessionStorage.setItem("loginPsd", $("#psd").val());
 				//trigger 事件执行完后，浏览器会为submit按钮获得焦点
 				$("form .required:input").trigger("blur");
 				var numError = $("form .onError").length;
@@ -156,7 +160,11 @@
 				}
 			});
 		})
-
+		function getQuery(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null) return decodeURI(r[2]); return null;
+			}
 	</script>
 </body>
 

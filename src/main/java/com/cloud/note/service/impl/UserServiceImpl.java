@@ -1,17 +1,15 @@
 /*
  * @Date: 2021-07-15 16:24:24
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-07-28 16:37:59
+ * @LastEditTime: 2021-08-04 15:27:03
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\UserServiceImpl.java
  */
 package com.cloud.note.service.impl;
 
 import com.cloud.note.dao.UserMapper;
-import com.cloud.note.entity.Constant;
 import com.cloud.note.entity.User;
 import com.cloud.note.service.UserService;
 import com.cloud.note.utils.MD5Util;
-import com.cloud.note.utils.TokenUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,3 +1,9 @@
+/*
+ * @Date: 2021-07-15 16:24:24
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-07-30 17:34:37
+ * @FilePath: \note\src\main\java\com\cloud\note\service\UserService.java
+ */
 package com.cloud.note.service;
 
 import com.cloud.note.entity.User;
@@ -32,10 +38,10 @@ public interface UserService {
     int checkMobile(String userMobile);
 
     /**
-     * 更新锁定区分
-     *
-     * @param userMobile
-     * @return
+     * @description: 更新锁定区分
+     * @param {String} userMobile
+     * @param {int} a 1:flg加1，0:flg重置
+     * @return {*}
      */
     int updateLockFlg(String userMobile, int a);
 
