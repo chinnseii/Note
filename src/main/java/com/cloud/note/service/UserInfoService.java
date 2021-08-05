@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-21 10:51:04
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-04 15:05:50
+ * @LastEditTime: 2021-08-05 17:37:22
  * @FilePath: \note\src\main\java\com\cloud\note\service\UserInfoService.java
  */
 package com.cloud.note.service;
@@ -14,4 +14,6 @@ public interface UserInfoService {
 
     //ユーザー情報取得
     UserInfo getUserInfo(String userMobile);
+
+    int updateUserSignature(UserInfo userInfo);
 }

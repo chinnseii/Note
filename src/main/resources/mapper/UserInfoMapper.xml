@@ -39,5 +39,10 @@
     FROM USER_INFO WHERE USER_MOBILE = #{ userMobile, jdbcType = VARCHAR }
   </select>
 
+  <update id="updateUserSignature" parameterType="com.cloud.note.entity.UserInfo" >
+    UPDATE USER_INFO SET SIGNATURE=#{signature, jdbcType = VARCHAR }
+     WHERE USER_MOBILE = #{userMobile, jdbcType = VARCHAR }
+  </update>
+
 
 </mapper>
