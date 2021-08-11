@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-15 16:24:23
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-04 17:45:24
+ * @LastEditTime: 2021-08-11 16:37:56
  * @FilePath: \note\src\main\java\com\cloud\note\config\MyConfig.java
  */
 package com.cloud.note.config;
@@ -21,7 +21,7 @@ public class MyConfig implements WebMvcConfigurer {
     public AuthenticationInterceptor authenticationInterceptor() {
         return new AuthenticationInterceptor();
     }
-    
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");

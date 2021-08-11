@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-21 10:53:11
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-05 17:37:39
+ * @LastEditTime: 2021-08-10 15:50:31
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\UserInfoServiceImpl.java
  */
 package com.cloud.note.service.impl;
@@ -32,6 +32,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public int updateUserSignature(UserInfo userInfo) {       
         return userInfoMapper.updateUserSignature(userInfo);
+    }
+
+    @Override
+    public int updateUserProfilePhoto(UserInfo userInfo) {
+        return userInfoMapper.updateUserProfilePhoto(userInfo);
     }
 
 }

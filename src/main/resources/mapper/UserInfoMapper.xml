@@ -40,7 +40,12 @@
   </select>
 
   <update id="updateUserSignature" parameterType="com.cloud.note.entity.UserInfo" >
-    UPDATE USER_INFO SET SIGNATURE=#{signature, jdbcType = VARCHAR }
+    UPDATE USER_INFO SET SIGNATURE=#{signature, jdbcType = VARCHAR } ,UPDATE_TIME=date_format(now(),'%Y%m%d%H%i%s')
+     WHERE USER_MOBILE = #{userMobile, jdbcType = VARCHAR }
+  </update>
+
+  <update id="updateUserProfilePhoto" parameterType="com.cloud.note.entity.UserInfo" >
+    UPDATE USER_INFO SET PROFILE_PHOTO=#{profilePhoto, jdbcType = VARCHAR } ,UPDATE_TIME=date_format(now(),'%Y%m%d%H%i%s')
      WHERE USER_MOBILE = #{userMobile, jdbcType = VARCHAR }
   </update>
 

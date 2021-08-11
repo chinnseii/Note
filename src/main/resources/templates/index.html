@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/favicon.ico" type="images/x-ico">
     <link href="/css/index.css" rel="stylesheet">
+    <link href="css/layx.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/doc.css" rel="stylesheet" type="text/css" />
     <title th:text="${nickName}"></title>
     <style>
     </style>
@@ -128,7 +130,14 @@
     </div>
 </body>
 <script src="/libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="/libs/Layx/layx.min.js"></script>
 <script>
+    $("#changeProfilePhoto").click(function () {
+        layx.iframe('shadow-color', 'アバター更新', 'changeProfilePhoto', {
+            shadable: 0.8
+        });
+    });
+
     $(function () {
         if ("[[${token}]]".length != 0) {
             localStorage.setItem("token", "[[${token}]]");
@@ -139,9 +148,10 @@
         if ("[[${nickName}]]".length != 0) {
             localStorage.setItem("nickName", "[[${nickName}]]");
         }
-       if($("#nickName").text()==0){
-        $("#nickName").append(localStorage.getItem("nickName"));
-       } 
+        if ($("#nickName").text() == 0) {
+            $("#nickName").append(localStorage.getItem("nickName"));
+            $(document).attr("title", localStorage.getItem("nickName"));
+        }
         if (localStorage.getItem("token") == undefined || localStorage.getItem("userMobile") == undefined) {
             window.location.href = "login";
         } else {
@@ -166,34 +176,40 @@
                         $("#follow").append(result.follow);
                         $("#star").append(result.star);
                         $("#level").append(result.level);
-                        localStorage.setItem("signature", result.signature);                       
+                        localStorage.setItem("signature", result.signature);
                         $("#signature").val(result.signature);
-                        $(".profilephoto").attr("src", "profilephoto/"+result.profilePhoto);
+                        if(result.profilePhoto=='init_profilephoto.png'){
+                          localStorage.setItem("profilephotoPath", "profilephoto/" + result.profilePhoto);
+                        }else{
+                            var json = JSON.parse(result.profilePhoto);
+                            localStorage.setItem("profilephotoPath", "profilephoto/" + json.path);              
+                        }  
+                       $(".profilephoto").attr("src", localStorage.getItem("profilephotoPath"));                 
                     }
                 }
             });
         }
-        $("#signature").blur(function () {           
-            if(localStorage.getItem("signature")!=$("#signature").val()){
+        $("#signature").blur(function () {
+            if (localStorage.getItem("signature") != $("#signature").val()) {
                 $.ajax({
-                type: "POST",
-                url: "/updateUserSignature",
-                beforeSend: function (request) {
-                    request.setRequestHeader("header", headerInfo);
-                },
-                data: {
-                    'userMobile': localStorage.getItem("userMobile"),
-                    'signature': $("#signature").val()
-                },
-                success: function (result) {
-                    var json = JSON.parse(result);
-                    if (!json.res) {
-                      alert("個人説明更新失敗しました、も一度更新してください。");
-                    }else{
-                        localStorage.setItem("signature", $("#signature").val());
+                    type: "POST",
+                    url: "/updateUserSignature",
+                    beforeSend: function (request) {
+                        request.setRequestHeader("header", headerInfo);
+                    },
+                    data: {
+                        'userMobile': localStorage.getItem("userMobile"),
+                        'signature': $("#signature").val()
+                    },
+                    success: function (result) {
+                        var json = JSON.parse(result);
+                        if (!json.res) {
+                            alert("個人説明更新失敗しました、も一度更新してください。");
+                        } else {
+                            localStorage.setItem("signature", $("#signature").val());
+                        }
                     }
-                }
-            }); 
+                });
             }
         });
     })

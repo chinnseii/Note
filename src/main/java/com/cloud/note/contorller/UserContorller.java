@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-15 16:24:23
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-05 16:10:01
+ * @LastEditTime: 2021-08-11 13:37:43
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\UserContorller.java
  */
 package com.cloud.note.contorller;
@@ -69,11 +69,11 @@ public class UserContorller {
                 // 新規登録成功の場合、ログイン処理を開始します。
                 return login(userMobile, userPassword, modelAndView, model, redirectAttributes);
             } else {
-                log.error("ユーザー:" + userMobile + "新規登録失敗");
+                log.error("ユーザー:" + userMobile + " 新規登録失敗");
                 return modelAndView;
             }
         } else {
-            log.error("ユーザー:" + userMobile + "新規登録失敗：アカウント存在しています。");
+            log.error("ユーザー:" + userMobile + " 新規登録失敗：アカウント存在しています。");
             model.addAttribute("registerErrorMsg", constant.getMOBILE_EXIST_INCORRECT_ERRORMSG());
             return modelAndView;
         }
