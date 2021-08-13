@@ -106,7 +106,7 @@
 	<script>
 		$(function () {
 			var errorMsg = getQuery("errorMsg")
-			if (errorMsg.length != 0) {
+			if (errorMsg!=undefined) {
 				alert(errorMsg);
 			}
 			$("#mobile").val(sessionStorage.getItem("loginMobile"));

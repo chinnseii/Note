@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-15 16:24:23
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-11 16:37:56
+ * @LastEditTime: 2021-08-11 17:08:01
  * @FilePath: \note\src\main\java\com\cloud\note\config\MyConfig.java
  */
 package com.cloud.note.config;
