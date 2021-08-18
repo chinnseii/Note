@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-21 10:53:11
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-13 17:01:39
+ * @LastEditTime: 2021-08-18 11:01:32
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\UserInfoServiceImpl.java
  */
 package com.cloud.note.service.impl;
@@ -39,17 +39,28 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public int initUserInfo(String userMobile) {
-        return userInfoMapper.initUserInfo(userMobile);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUser_mobile(userMobile);
+        userInfo.setProfile_photo(constant.getINIT_AVATAR_NAME());
+        userInfo.setSignature("");
+        userInfo.setExp("0");
+        userInfo.setFollow("0");
+        userInfo.setStar("0");
+        userInfo.setFan("0");
+        userInfo.setUser_level("0");
+        userInfo.setUpdate_time(StringUtil.getTimeHMS());
+        return userInfoMapper.insert(userInfo);
     }
 
     @Override
     public UserInfo getUserInfo(String userMobile) {
-        return userInfoMapper.getUserInfo(userMobile);
+        return userInfoMapper.selectById(userMobile);
     }
 
     @Override
     public int updateUserSignature(UserInfo userInfo) {
-        return userInfoMapper.updateUserSignature(userInfo);
+        userInfo.setUpdate_time(StringUtil.getTimeHMS());
+        return userInfoMapper.updateById(userInfo);
     }
 
     @Override
@@ -58,15 +69,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         JSONObject res = new JSONObject();
         res.put("res", false);
         // アバター設定されてない場合削除処理行わない
-        if (!userInfo.getProfilePhoto().equals("init_profilephoto.png")) {
-            JSONObject oldProfilePhoto;
-            // 古いアバター削除
-            oldProfilePhoto = new JSONObject(userInfo.getProfilePhoto());
-            Path path = Paths.get(oldProfilePhoto.getString("path"));
+        if (!userInfo.getProfile_photo().equals(constant.getINIT_AVATAR_NAME())) {
+            Path path = Paths.get(userInfo.getProfile_photo());
             Files.deleteIfExists(path);
-            String dirPath = oldProfilePhoto.getString("path").replaceAll(path.toFile().getName(), "");
+            String dirPath = userInfo.getProfile_photo().replaceAll(path.toFile().getName(), "");
             // 旧アバター削除済み、空のフォルダの場合フォルダも削除
-            if (Paths.get(dirPath).toFile().listFiles().length == 0) {
+            if (Paths.get(dirPath).toFile().exists() && Paths.get(dirPath).toFile().listFiles().length == 0) {
                 Files.deleteIfExists(Paths.get(dirPath));
             }
         }
@@ -77,12 +85,13 @@ public class UserInfoServiceImpl implements UserInfoService {
             avatarDirFile.mkdirs();
         }
         String filetype = StringUtil.getFileType(multipartFile.getOriginalFilename());
-        String avatarNewPath = avatarDir + File.separator + userInfo.getUserMobile() + "." + filetype;
+        String avatarNewPath = avatarDir + File.separator + userInfo.getUser_mobile() + "_" + StringUtil.getTimeHMS()
+                + "." + filetype;
         avatar.put("path", avatarNewPath);
         try {
             BufferedImage bufferedImage = ImageIO.read(multipartFile.getInputStream());
             if (bufferedImage == null) {
-                log.info("ユーザー:" + userInfo.getUserMobile() + "アップロードのは写真ではない");
+                log.info("ユーザー:" + userInfo.getUser_mobile() + "アップロードのは写真ではない");
                 res.put("defeat", "アップロードのは写真ではない");
                 return res;
             }
@@ -119,18 +128,19 @@ public class UserInfoServiceImpl implements UserInfoService {
             // アバターファイル作成
             ImageIO.write(newImage, filetype, new File(avatarNewPath));
         } catch (Exception e) {
-            log.info("ユーザー:" + userInfo.getUserMobile() + " アバター更新処理失敗しました", e.getMessage());
+            log.info("ユーザー:" + userInfo.getUser_mobile() + " アバター更新処理失敗しました", e.getMessage());
             e.printStackTrace();
             res.put("defeat", " アバター更新失敗しました");
             return res;
         }
-        log.info("ユーザー:" + userInfo.getUserMobile() + " アバターアップロード成功、データベース更新開始");
-        userInfo.setProfilePhoto(avatar.toString());
-        if (userInfoMapper.updateUserProfilePhoto(userInfo) != 1) {
-            log.error("ユーザー:" + userInfo.getUserMobile() + " アバターDB情報更新失敗しました");
+        log.info("ユーザー:" + userInfo.getUser_mobile() + " アバターアップロード成功、データベース更新開始");
+        userInfo.setProfile_photo(avatarNewPath.replace(constant.getAVATAR_PATH(), ""));
+        userInfo.setUpdate_time(StringUtil.getTimeHMS());
+        if (userInfoMapper.updateById(userInfo) != 1) {
+            log.error("ユーザー:" + userInfo.getUser_mobile() + " アバターDB情報更新失敗しました");
             res.put("defeat", " アバター更新失敗しました");
         }
-        log.info("ユーザー:" + userInfo.getUserMobile() + " アバター更新成功");
+        log.info("ユーザー:" + userInfo.getUser_mobile() + " アバター更新成功");
         res.put("res", true);
         return res;
     }

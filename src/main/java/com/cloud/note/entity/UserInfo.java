@@ -1,26 +1,29 @@
 /*
  * @Date: 2021-07-21 09:23:19
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-07-30 13:03:59
+ * @LastEditTime: 2021-08-18 10:16:56
  * @FilePath: \note\src\main\java\com\cloud\note\entity\UserInfo.java
  */
 package com.cloud.note.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Data
-@NoArgsConstructor
+@TableName("UserInfo")
 public class UserInfo {
-
-    private String userMobile;
-    private String profilePhoto;
+    @TableId(value = "user_mobile")
+    private String user_mobile;
+    private String profile_photo;
     private String signature;
     private String follow;
     private String fan;
     private String star;
-    private String level;
+    private String user_level;
     private String exp;
-    private String updateTime;
-
+    private String update_time;
 }

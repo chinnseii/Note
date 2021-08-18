@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-21 09:49:05
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-13 13:50:11
+ * @LastEditTime: 2021-08-18 11:10:06
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\UserInfoContorller.java
  */
 package com.cloud.note.contorller;
@@ -29,9 +29,6 @@ public class UserInfoContorller {
   @Autowired
   private UserInfoService userInfoService;
 
-  @Autowired
-  private Constant constant;
-
   public int initUserInfo(String userMobile) {
     return userInfoService.initUserInfo(userMobile);
   }
@@ -43,18 +40,6 @@ public class UserInfoContorller {
   public UserInfo getUserInfo(@RequestParam("userMobile") String mobile) {
     log.info("ユーザー:" + mobile + " 個人情報取得開始");
     UserInfo userInfo = userInfoService.getUserInfo(mobile);
-    // アバターまだ初期化の状態、そのまま画面側に送る
-    if (!userInfo.getProfilePhoto().equals("init_profilephoto.png")) {
-      JSONObject jsonObject;
-    try {
-      jsonObject = new JSONObject(userInfo.getProfilePhoto());
-      String path = jsonObject.getString("path").replaceAll(constant.getAVATAR_PATH(), "");
-      userInfo.setProfilePhoto(jsonObject.put("path", path).toString());
-    } catch (JSONException e) {
-      log.error("ユーザー:" + mobile + " 個人情報取得失敗" +e.getMessage());
-      e.printStackTrace();
-    }
-    } 
     log.info("ユーザー:" + mobile + " 個人情報取得成功");
     return userInfo;
   }
@@ -67,7 +52,7 @@ public class UserInfoContorller {
     log.info("ユーザー:" + userMobile + " 個人説明更新開始");
     UserInfo userInfo = new UserInfo();
     userInfo.setSignature(signature);
-    userInfo.setUserMobile(userMobile);
+    userInfo.setUser_mobile(userMobile);
     JSONObject res = new JSONObject();
     try {
       if (userInfoService.updateUserSignature(userInfo) != 1) {

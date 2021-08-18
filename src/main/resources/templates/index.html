@@ -175,15 +175,10 @@
                         $("#fan").append(result.fan);
                         $("#follow").append(result.follow);
                         $("#star").append(result.star);
-                        $("#level").append(result.level);
+                        $("#level").append(result.user_level);
                         localStorage.setItem("signature", result.signature);
                         $("#signature").val(result.signature);
-                        if(result.profilePhoto=='init_profilephoto.png'){
-                          localStorage.setItem("profilephotoPath", "profilephoto/" + result.profilePhoto);
-                        }else{
-                            var json = JSON.parse(result.profilePhoto);
-                            localStorage.setItem("profilephotoPath", "profilephoto/" + json.path);              
-                        }  
+                        localStorage.setItem("profilephotoPath", "profilephoto/" + result.profile_photo);
                        $(".profilephoto").attr("src", localStorage.getItem("profilephotoPath"));                 
                     }
                 }
@@ -204,10 +199,14 @@
                     success: function (result) {
                         var json = JSON.parse(result);
                         if (!json.res) {
-                            alert("個人説明更新失敗しました、も一度更新してください。");
+                            layx.msg('個人説明更新失敗しました、も一度更新してください。',{dialogIcon:'error'});
                         } else {
                             localStorage.setItem("signature", $("#signature").val());
+                            layx.alert('個人説明更新','個人説明更新成功',null,{dialogIcon:'success'});
                         }
+                    },
+                    error: function(result){
+                        layx.msg('個人説明更新失敗しました、も一度更新してください。',{dialogIcon:'error'});
                     }
                 });
             }

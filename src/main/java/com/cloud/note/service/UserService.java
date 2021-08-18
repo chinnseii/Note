@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-15 16:24:24
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-07-30 17:34:37
+ * @LastEditTime: 2021-08-18 09:48:13
  * @FilePath: \note\src\main\java\com\cloud\note\service\UserService.java
  */
 package com.cloud.note.service;
@@ -36,6 +36,14 @@ public interface UserService {
      * @return
      */
     int checkMobile(String userMobile);
+
+    /**
+     * 检查是否锁定
+     *
+     * @param userMobile
+     * @return
+     */
+    int checkLockFlg(String userMobile);
 
     /**
      * @description: 更新锁定区分

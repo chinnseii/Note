@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-15 16:24:23
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-11 13:37:43
+ * @LastEditTime: 2021-08-18 09:57:13
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\UserContorller.java
  */
 package com.cloud.note.contorller;
@@ -56,7 +56,6 @@ public class UserContorller {
         int checkExits = userService.checkMobile(userMobile);
         if (checkExits == 0) {
             int result = userService.insert(userNickName, userMobile, userPassword);
-
             if (result != 0) {
                 log.info("ユーザー:" + userMobile + " 新規登録成功、アカウント初期化開始");
                 // アカウント初期化
@@ -77,7 +76,6 @@ public class UserContorller {
             model.addAttribute("registerErrorMsg", constant.getMOBILE_EXIST_INCORRECT_ERRORMSG());
             return modelAndView;
         }
-
     }
 
     @PostMapping(value = "/login")
@@ -97,17 +95,19 @@ public class UserContorller {
             model.addAttribute("loginErrorMsg", constant.getMOBILE_OR_PASSWORD_INCORRECT_ERRORMSG());
             return modelAndView;
         }
+        //ロックフラグチェック
+        int checkLockFlg =userService.checkLockFlg(userMobile);
+        if (checkLockFlg == 5) {
+            model.addAttribute("loginErrorMsg", constant.getACCOUNT_LOGKED_ERRORMSG());
+            return modelAndView;
+        }
         // ログイン処理
         User user = userService.login(userMobile, userPassword);
         if (user == null) {
             model.addAttribute("loginErrorMsg", constant.getMOBILE_OR_PASSWORD_INCORRECT_ERRORMSG());
-            // 密码错误，锁定flg加一
             userService.updateLockFlg(userMobile, 1);
             return modelAndView;
-        } else if (Integer.valueOf(user.getLockedFlg()) == 5) {
-            model.addAttribute("loginErrorMsg", constant.getACCOUNT_LOGKED_ERRORMSG());
-            return modelAndView;
-        } else {
+        }else {
             // ロックフラグをリラン
             userService.updateLockFlg(userMobile, 0);
             // 身分証明(token)を生成
@@ -115,7 +115,7 @@ public class UserContorller {
             long expire = constant.getExpire();// token有効期限を取得
             redirectAttributes.addFlashAttribute("token", TokenUtil.createToken(userMobile, expire, secretKey));
             redirectAttributes.addFlashAttribute("userMobile", userMobile);
-            redirectAttributes.addFlashAttribute("nickName", user.getNickName());
+            redirectAttributes.addFlashAttribute("nickName", user.getNick_name());
             redirectAttributes.addFlashAttribute("loginErrorMsg", "");
             modelAndView.setViewName("redirect:index");
             log.info("ユーザー:" + userMobile + " ログイン成功");

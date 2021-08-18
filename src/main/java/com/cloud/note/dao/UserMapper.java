@@ -1,22 +1,13 @@
+/*
+ * @Date: 2021-07-15 16:24:23
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-08-17 17:47:59
+ * @FilePath: \note\src\main\java\com\cloud\note\dao\UserMapper.java
+ */
 package com.cloud.note.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cloud.note.entity.User;
-import org.apache.ibatis.annotations.Param;
 
-public interface UserMapper {
-    // 新規登録
-    int insert(User user);
-
-    // ログイン
-    User login(User user);
-
-    // アカウント存在チェック
-    int checkMobile(@Param("userMobile") String userMobile);
-
-    // リセットロックフラグ
-    int resetLock(@Param("userMobile") String userMobile);
-
-    // ロックフラグ更新
-    int updateLock(@Param("userMobile") String userMobile);
-
+public interface UserMapper extends BaseMapper<User> {
 }
