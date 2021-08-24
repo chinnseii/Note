@@ -277,7 +277,6 @@ body {
     width: 64px;
     height: 64px;
     float: left;
-    margin-left: 20px;
     margin-top: 15px;
     border: 2px solid hsla(0, 0%, 100%, .4);
     border-radius: 50%;
@@ -382,7 +381,6 @@ body {
 
 /* 用户信息导航区 */
 .user_nav {
-    width: 1240px;
     height: 66px;
     margin: 0 auto;
     padding: 0 20px;
@@ -392,7 +390,6 @@ body {
 }
 
 .user_nav .un_left {
-    width: 600px;
     height: 66px;
     float: left;
     font-family: Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
@@ -437,14 +434,13 @@ body {
     height: 18px;
     margin-right: 5px;
     position: relative;
-    top: 4px;
+    top: 0px;
 }
 
 .user_nav .un_mid {
     position: relative;
     display: inline-block;
-    width: 100px;
-    height: 30px;
+    width: 30%;
     top: 17px;
     vertical-align: middle;
 }
@@ -452,7 +448,7 @@ body {
 .user_nav .un_mid input {
     position: absolute;
     height: 30px;
-    width: 100px;
+    width: 30%;
     padding: 0 29px 0 10px;
     line-height: 30px;
     color: #222;

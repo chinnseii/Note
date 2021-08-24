@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-15 16:24:24
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-18 10:16:49
+ * @LastEditTime: 2021-08-18 13:51:42
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\UserServiceImpl.java
  */
 package com.cloud.note.service.impl;
@@ -72,7 +72,6 @@ public class UserServiceImpl implements UserService {
         queryWrapper.eq("user_mobile", userMobile);
         return userMapper.selectCount(queryWrapper);
     }
-
 
     @Override
     /**

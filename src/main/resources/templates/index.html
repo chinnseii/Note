@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="icon" href="img/favicon.ico" type="images/x-ico">
-    <link href="/css/index.css" rel="stylesheet">
     <link href="css/layx.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/doc.css" rel="stylesheet" type="text/css" />
     <title th:text="${nickName}"></title>
     <style>
     </style>
@@ -21,28 +23,25 @@
     <div class="message_content">
         <div class="mc_left">
             <div class="mcl_topvideo">
-                <div class="mcltv_t">
-                    <ul>
-                        <li><input type="radio"><span>我的粉丝会看到</span></li>
-                        <li><input type="radio"><span>新访客会看到</span></li>
-                    </ul>
-                </div>
-                <div class="mcltv_b">
-                    <div class="mcltv_bl">
-                        <div class="tvbl_add"></div>
-                        <div class="tvbl_text">设置置顶视频</div>
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="active"><a href="#">公開</a></li>
+                    <li role="presentation"><a href="#">私有</a></li>
+                </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Panel heading without title</div>
+                    <div class="panel-body">
+                        Panel content
                     </div>
-                    <div class="mcltv_br"></div>
                 </div>
-            </div>
-            <!-- 我的视频 -->
-            <div class="mcl_myvideo">
-                <h3><a href="">我的视频</a></h3>
-                <div class="mcl_zero">还没有上传过视频哦~~ &nbsp;&nbsp;<a href="">立即上传</a></div>
-            </div>
-            <!-- 我的专栏 -->
-            <div class="mcl_myclumn">
-                <h3><a href="">我的专栏</a></h3>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
             </div>
             <!-- 我的频道 -->
             <div class="mcl_mychannel">
@@ -50,94 +49,22 @@
                 <div class="empty-state">
                     <p>投稿视频可以分类展示了</p>
                     <div class="state-btn">
-                        <a href=""><span>创建频道</span></a>
+                        <a id="createCategory"><span>科目作成</span></a>
                     </div>
-                </div>
-            </div>
-            <!-- 我的收藏 -->
-            <div class="mcl_mycollection">
-                <h3><a href="">我的收藏</a></h3>
-            </div>
-            <!-- 订阅番剧 -->
-            <div class="mcl_fun">
-                <h3><a href="">订阅番剧</a>
-                    <span class="private-hint">
-                        <span class="icon"></span>
-                        <span>仅自己可见</span>
-                    </span>
-                </h3>
-                <div class="mcl_zero">空间主人还没有订阅过番剧~~</div>
-            </div>
-            <!-- 订阅标签 -->
-            <div class="mcl_label">
-                <h3><a href="">订阅标签</a>
-                    <span class="private-hint">
-                        <span class="icon"></span>
-                        <span>仅自己可见</span>
-                    </span>
-                </h3>
-                <div class="mcl_zero">空间主人还没有订阅过标签~~</div>
-            </div>
-            <!-- 最近投币的视频 -->
-            <div class="mcl_coin">
-                <h3><a href="">最近投币的视频</a>
-                    <span class="private-hint">
-                        <span class="icon"></span>
-                        <span>仅自己可见</span>
-                    </span>
-                </h3>
-                <div class="mcl_zero">空间主人近一个月没有投过硬币~~</div>
-            </div>
-            <!-- 我的相薄 -->
-            <div class="mcl_album">
-                <h3><a href="">我的相薄</a></h3>
-                <div class="mcl_zero">还没有上传相薄哦~~</div>
-            </div>
-        </div>
-        <!-- 右侧信息区 -->
-        <div class="mc_right">
-            <div class="mcr_certification">
-                <div class="mcrc_logo"><img src="img/icon-auth.png" alt=""></div>
-                <div class="mcrc_text">
-                    <a href="">点此申请 bilibili 认证</a>
-                    <P>获得 bilibili 认证，享受多重认证福利！</P>
-                </div>
-            </div>
-            <div class="mcr_creation">
-                <div class="mcra_logo">
-                    <img src="img/icon_createCenters.png" alt="">
-                    <b><img src="img/rightpoint.png" alt=""></b>
-                </div>
-                <div class="mcra_btn">
-                    <div class="mcra_bl">
-                        <a href=""><b></b>视频投稿</a>
-                    </div>
-                    <div class="mcra_br">
-                        <a href=""><b></b>内容管理</a>
-                    </div>
-                </div>
-            </div>
-            <div class="mcr_notice">
-                <div class="mcrn_title">
-                    <h3>公告</h3>
-                </div>
-                <div class="mcrn_content">
-                    <textarea type="textarea" rows="4" placeholder="编辑我的空间公告" maxlength="150"></textarea>
-                    <div class="content_limit">0/150</div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-<script src="/libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
+    integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
 <script src="/libs/Layx/layx.min.js"></script>
+<script src="/js/index.js"></script>
 <script>
-    $("#changeProfilePhoto").click(function () {
-        layx.iframe('shadow-color', 'アバター更新', 'changeProfilePhoto', {
-            shadable: 0.8
-        });
-    });
-
     $(function () {
         if ("[[${token}]]".length != 0) {
             localStorage.setItem("token", "[[${token}]]");
@@ -149,7 +76,7 @@
             localStorage.setItem("nickName", "[[${nickName}]]");
         }
         if ($("#nickName").text() == 0) {
-            $("#nickName").append(localStorage.getItem("nickName"));
+            $(".nickName").append(localStorage.getItem("nickName"));
             $(document).attr("title", localStorage.getItem("nickName"));
         }
         if (localStorage.getItem("token") == undefined || localStorage.getItem("userMobile") == undefined) {
@@ -179,11 +106,36 @@
                         localStorage.setItem("signature", result.signature);
                         $("#signature").val(result.signature);
                         localStorage.setItem("profilephotoPath", "profilephoto/" + result.profile_photo);
-                       $(".profilephoto").attr("src", localStorage.getItem("profilephotoPath"));                 
+                        $(".profilephoto").attr("src", localStorage.getItem("profilephotoPath"));
                     }
+                },
+                error: function () {
+                    layx.msg('サーバー異常、ユーザー情報取得失敗', { dialogIcon: 'error' });
                 }
             });
         }
+        $("#createCategory").click(function () {
+            layx.prompt('科目作成', '科目名を入力してください。', function (id, value, textarea, button, event) {
+                layx.confirm('', '科目: ' + value + ' 公開しますか？', null, {
+                    buttons: [
+                        {
+                            label: 'はい',
+                            callback: function (id, button, event) {
+                                createCategory(value, 0);
+                                layx.destroy(id);
+                            }
+                        },
+                        {
+                            label: 'いええ',
+                            callback: function (id, button, event) {
+                                createCategory(value, 1);
+                                layx.destroy(id);
+                            }
+                        }
+                    ]
+                });
+            });
+        });
         $("#signature").blur(function () {
             if (localStorage.getItem("signature") != $("#signature").val()) {
                 $.ajax({
@@ -199,14 +151,14 @@
                     success: function (result) {
                         var json = JSON.parse(result);
                         if (!json.res) {
-                            layx.msg('個人説明更新失敗しました、も一度更新してください。',{dialogIcon:'error'});
+                            layx.msg('個人説明更新失敗しました、も一度更新してください。', { dialogIcon: 'error' });
                         } else {
                             localStorage.setItem("signature", $("#signature").val());
-                            layx.alert('個人説明更新','個人説明更新成功',null,{dialogIcon:'success'});
+                            layx.alert('個人説明更新', '個人説明更新成功', null, { dialogIcon: 'success' });
                         }
                     },
-                    error: function(result){
-                        layx.msg('個人説明更新失敗しました、も一度更新してください。',{dialogIcon:'error'});
+                    error: function (result) {
+                        layx.msg('個人説明更新失敗しました、も一度更新してください。', { dialogIcon: 'error' });
                     }
                 });
             }

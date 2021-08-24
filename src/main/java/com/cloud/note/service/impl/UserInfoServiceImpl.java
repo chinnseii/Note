@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-21 10:53:11
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-18 11:01:32
+ * @LastEditTime: 2021-08-18 13:28:05
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\UserInfoServiceImpl.java
  */
 package com.cloud.note.service.impl;
@@ -70,7 +70,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         res.put("res", false);
         // アバター設定されてない場合削除処理行わない
         if (!userInfo.getProfile_photo().equals(constant.getINIT_AVATAR_NAME())) {
-            Path path = Paths.get(userInfo.getProfile_photo());
+            Path path = Paths.get(constant.getAVATAR_PATH() + userInfo.getProfile_photo());
             Files.deleteIfExists(path);
             String dirPath = userInfo.getProfile_photo().replaceAll(path.toFile().getName(), "");
             // 旧アバター削除済み、空のフォルダの場合フォルダも削除
@@ -85,8 +85,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             avatarDirFile.mkdirs();
         }
         String filetype = StringUtil.getFileType(multipartFile.getOriginalFilename());
-        String avatarNewPath = avatarDir + File.separator + userInfo.getUser_mobile() + "_" + StringUtil.getTimeHMS()
-                + "." + filetype;
+        String avatarNewPath = avatarDir + File.separator + userInfo.getUser_mobile() +"." + filetype;
         avatar.put("path", avatarNewPath);
         try {
             BufferedImage bufferedImage = ImageIO.read(multipartFile.getInputStream());

@@ -1,3 +1,4 @@
+
 package com.cloud.note.utils;
 
 import java.text.SimpleDateFormat;
@@ -22,6 +23,11 @@ public class StringUtil {
         return extension;
     }
 
+    /**
+     * @description: 获取时间（年月日）
+     * @param {*}
+     * @return {*}
+     */
     public static String getTimeToday() {
         SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
         sdf.applyPattern("yyyyMMdd");// a为am/pm的标记
@@ -29,6 +35,11 @@ public class StringUtil {
         return sdf.format(date);
     }
 
+    /**
+     * @description: 获取时间（年月日时分秒）
+     * @param {*}
+     * @return {*}
+     */
     public static String getTimeHMS() {
         SimpleDateFormat sdf = new SimpleDateFormat();// 格式化时间
         sdf.applyPattern("yyyyMMddHHmmss");// a为am/pm的标记

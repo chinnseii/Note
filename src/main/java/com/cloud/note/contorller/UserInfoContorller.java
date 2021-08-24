@@ -1,13 +1,12 @@
 /*
  * @Date: 2021-07-21 09:49:05
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-18 11:10:06
+ * @LastEditTime: 2021-08-23 10:14:17
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\UserInfoContorller.java
  */
 package com.cloud.note.contorller;
 
 import com.cloud.note.annotation.TokenCheck;
-import com.cloud.note.entity.Constant;
 import com.cloud.note.entity.UserInfo;
 import com.cloud.note.service.UserInfoService;
 import com.cloud.note.utils.StringUtil;

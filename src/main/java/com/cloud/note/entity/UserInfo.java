@@ -1,12 +1,11 @@
 /*
  * @Date: 2021-07-21 09:23:19
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-18 10:16:56
+ * @LastEditTime: 2021-08-18 16:06:52
  * @FilePath: \note\src\main\java\com\cloud\note\entity\UserInfo.java
  */
 package com.cloud.note.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 

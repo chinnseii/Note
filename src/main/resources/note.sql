@@ -30,6 +30,7 @@ create table if not exists category(
     id int primary key auto_increment comment 'id'
     , user_mobile varchar (11) not null comment '手机号码'
     , category_name varchar (50) not null comment '类目名称'
+    , star char (11) comment '标星'
     , create_date char (14) not null comment '创建时间'
     , update_date char (14) comment '更新时间'
     , status int (1) not null comment '是否公开'

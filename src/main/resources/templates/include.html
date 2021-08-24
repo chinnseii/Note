@@ -1,103 +1,132 @@
+<!--
+ * @Date: 2021-08-19 13:24:09
+ * @LastEditors: CHEN SHENGWEI
+ * @LastEditTime: 2021-08-23 17:18:50
+ * @FilePath: \note\src\main\resources\templates\include.html
+-->
 <header th:fragment="header">
-     <!-- 顶部导航栏 -->
-    <div class="header" >
-        <div class="header_content">
-
-            <!-- 左部分 -->
-            <div class="content_left">
-                <div class="logo"><a href=""><img src="/img/lanbitou_logo.png" alt="loading"></a></div>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${nickName}"></title>
+    <link href="/css/include.css" rel="stylesheet" type="text/css" />
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" href="#"><img src="/img/lanbitou_logo_small.png" alt="loading"></div>
             </div>
-            <!-- 中部搜索框 -->
-            <div class="content_mid">
-                <div class="search">
-                    <div class="search_box">
-                        <input type="search" placeholder="祝你天天开心呀！">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false" ><span id="author">ノート作成者</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="authorUl" >
+                            <li><a href="#" >自分</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">他人</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false"><span id="subject">ノート科目</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="subjectUl">
+                            <!-- <li><a href="#"><input/></a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="ノートを検索しょう！">
                     </div>
-                    <div class="search_btn">
-                        <button type="button"></button>
+                    <button type="submit" class="btn btn-default">検索</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false"> <span class="nickName"></span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">レベル：0</a></li>
+                            <li><a href="#">メッセージ　22</a></li>
+                            <li><a href="#">动态5</a></li>
+                            <li><a href="#">收藏</a></li>
+                            <li><a href="#">歴史</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" onclick="loginOut()">ログアウト</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        <div class="jumbotron">
+            <div class="row">
+                <div class="user_view">
+                    <div class="view_switch">
+                    </div>
+                    <div class="user_message">
+                        <div class="col-md-1">
+                            <div class="um_photo">
+                                <img class="profilephoto" src="" alt="loading">
+                                <a id="changeProfilePhoto">Change</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="um_right">
+                                <div class="umr_name">
+                                    <span id="nickName" class="nickName"></span>
+                                </div>
+                                <div class="umr_word">
+                                    <input type="text" placeholder="個人説明を編集してください。" id="signature">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- 右部分 -->
-            <div class="content_right">
-                <div class="user_photo"><img class="profilephoto" src="" alt="loading"></div>
-                <div class="right_nav">
-                    <ul>
-                        <li>レベル：<a href="" id="level"></a></li>
-                        <li><a href="">メッセージ</a><b>22</b></li>
-                        <li><a href="">动态</a><b>5</b></li>
-                        <li><a href="">收藏</a></li>
-                        <li><a href="">歴史</a></li>
-                    </ul>
-                </div>
-                <div class="uploading">
-                    <div class="uploading_p"><a href="">ノート</a></div>
-                </div>
-            </div>
         </div>
-    </div>
-    <!-- 中部内容区 -->
-    <div class="user_view">
-        <div class="view_switch">
-
-        </div>
-        <div class="user_message">
-            <div class="um_photo" >
-                <img class="profilephoto" src="" alt="loading">
-              <a id="changeProfilePhoto">更换头像</a>
-            </div>
-            <div class="um_right">
-                <div class="umr_name"  >
-                    <span th:text="${nickName}" id="nickName"></span>
-                </div>
-                <div class="umr_word">
-                    <input type="text" placeholder="個人説明を編集してください。" id="signature">
+        <div class="row">
+            <div class="col-md-1"><a href=""><img src="img/homepage.png" alt="">ホーム</a></div>
+            <div class="col-md-1"><a href=""><img src="img/dynamic.png" alt="">メッセージ</a></div>
+            <div class="col-md-1"><a href="#"><img src="img/contribute.png" alt="">ノート<span>2</span></a></div>
+            <div class="col-md-1"><a href="#"><img src="img/channel.png" alt="">チャネル<span>2</span></a></div>
+            <div class="col-md-1"><a href=""><img src="img/collection.png" alt="">スター<span>2</span></a></div>
+            <div class="col-md-1"><a href=""><img src="img/subscribe.png" alt="">注目</a></div>
+            <div class="col-md-1"><a href=""><img src="img/SetUp.png" alt="">設定</a></div>
+            <div class="col-md-1">
+                <div class="unr_fans">
+                    <a href="">
+                        <p class="up">follow:<span id="follow"></span></p>
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- 用户导航区 -->
-    <div class="user_nav">
-        <div class="un_left">
-            <ul>
-                <li><a href=""><img src="img/homepage.png" alt="">主页</a></li>
-                <li><a href=""><img src="img/dynamic.png" alt="">动态</a></li>
-                <li><a href=""><img src="img/contribute.png" alt="">投稿<span>2</span></a></li>
-                <li><a href=""><img src="img/channel.png" alt="">频道<span>2</span></a></li>
-                <li><a href=""><img src="img/collection.png" alt="">收藏<span>2</span></a></li>
-                <li><a href=""><img src="img/subscribe.png" alt="">订阅</a></li>
-                <li><a href=""><img src="img/SetUp.png" alt="">设置</a></li>
-            </ul>
-        </div>
-        <div class="un_mid">
-            <input type="text" placeholder="搜索视频">
-        </div>
-        <div class="un_right">
-            <div class="unr_fans">
-                <a href="">
-                    <p class="up">关注数</p>
-                    <p class="down" id="follow"></p>
-                </a>
+            <div class="col-md-1">
+                <div class="unr_fans">
+                    <a href="">
+                        <p class="up">fan:<span id="fan"></span></p>
+                    </a>
+                </div>
             </div>
-            <div class="unr_fans">
-                <a href="">
-                    <p class="up">粉丝数</p>
-                    <p class="down" id="fan"></p>
-                </a>
+            <div class="col-md-1">
+                <div class="unr_fans">
+                    <a href="">
+                        <p class="up">star:<span id="star"></span></p>
+                    </a>
+                </div>
             </div>
-            <div class="unr_fans">
-                <p class="up">获赞数</p>
-                <p class="down" id="star"></p>
-            </div>
-            <div class="unr_fans">
-                <p class="up">播放数</p>
-                <p class="down">99+</p>
-            </div>
-            <div class="unr_fans">
-                <p class="up">阅读数</p>
-                <p class="down">777</p>
-            </div>
-        </div>
-    </div>
-  </header>
-  
+        </div>   
+    </nav>
+</body>
+</head>

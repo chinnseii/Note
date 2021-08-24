@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-27 16:34:23
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-11 09:24:14
+ * @LastEditTime: 2021-08-19 09:25:37
  */
 package com.cloud.note.utils;
 
@@ -18,15 +18,17 @@ import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * @description: 生成token
- * @param {mobile，password}
- * @return {token}
- */
 @Component
 @Slf4j
 public class TokenUtil {
 
+    /**
+     * @description: 生成token
+     * @param {String} mobile
+     * @param {Long} expier
+     * @param {String} secretKey
+     * @return {*}
+     */
     public static String createToken(String mobile, Long expier, String secretKey) {
         String token = "";
         try {
@@ -45,6 +47,13 @@ public class TokenUtil {
         }
     }
 
+    /**
+     * @description: 验证token
+     * @param {String} token
+     * @param {String} secretKey
+     * @param {String} mobile
+     * @return {*}
+     */
     public static boolean checkToken(String token, String secretKey, String mobile) {
         try {
             // 验证 token
