@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-23 14:31:01
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-24 14:24:47
+ * @LastEditTime: 2021-08-24 16:51:01
  * @FilePath: \note\src\main\resources\static\js\index.js
  */
 /**
@@ -90,6 +90,7 @@ $("#authorUl li").click(function () {
         jsonObject.userMobile = localStorage.getItem("userMobile");
         var jsonData = JSON.stringify(jsonObject);
         var res = javaService("/getCategoryName", jsonData);
+        localStorage.setItem("jsonData",res);
         var json = JSON.parse(res);
         if (JSON.stringify(res) !== '{}') {
             for (var subject in json) {
@@ -149,4 +150,11 @@ function javaService(url, jsonData) {
         }
     });
     return res;
+}
+
+function createNote() {
+    layx.iframe('shadow-color', 'ノート作成', 'createNote', {
+        shadable: 0.8
+    });
+    layx.setSize('shadow-color', { width: 700, height: 600 });
 }

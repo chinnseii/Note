@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-18 17:07:02
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-24 11:58:58
+ * @LastEditTime: 2021-08-24 14:50:16
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\CategoryServiceImpl.java
  */
 package com.cloud.note.service.impl;
@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.cloud.note.dao.CategoryMapper;
 import com.cloud.note.entity.Category;
 import com.cloud.note.entity.Constant;
@@ -32,6 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
     public JSONObject createCategory(String mobile, String categoryName, String status) throws Exception {
         JSONObject res = new JSONObject();
         res.put("result", false);
+        if(categoryName.length()>50){
+            res.put("errorMsg", "科目名が50文字以下に設定してください。"); 
+            return res;
+        }
         QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
         if (categoryMapper.selectCount(queryWrapper.eq("user_mobile", mobile).eq("category_name", categoryName.trim())) != 0) {
             res.put("errorMsg", constant.getCATEGORY_EXIST_ERRORMSG()); 
@@ -65,7 +68,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public JSONObject getCategoryName(String mobile) throws Exception {
         QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("category_name");
+        queryWrapper.select("category_name").eq("user_mobile", mobile);
         List<Category> nameList=categoryMapper.selectList(queryWrapper);  
         List<String> list = new ArrayList<>();  
         if(!nameList.isEmpty()){
