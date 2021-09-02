@@ -539,13 +539,12 @@ body {
 
 /* 底部信息区 */
 .message_content {
-    width: 1280px;
-    height: 1200px;
+    width: 100%;
     margin: 10px auto;
 }
 
-.message_content .mc_left {
-    width: 880px;
+.mc_left {
+    width: 70%;
     height: 1170px;
     /* 暂时高度 */
     background: #fff;
@@ -1214,6 +1213,13 @@ body {
     /* #fb7299 */
 }
 
-.message_content .mc_right .mcr_notice .mcrn_content textarea:hover+.content_limit {
+.message_content .mc_right .mcr_notice .mcrn_content textarea:hover .content_limit {
     opacity: 1;
 }
+pre { 
+    white-space: pre-wrap; /*css-3*/ 
+    white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
+    white-space: -pre-wrap; /*Opera4-6*/ 
+    white-space: -o-pre-wrap; /*Opera7*/ 
+    word-wrap: break-word; /*InternetExplorer5.5+*/ 
+    } 

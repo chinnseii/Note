@@ -1,12 +1,13 @@
 /*
  * @Date: 2021-08-18 14:27:12
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-25 13:30:03
+ * @LastEditTime: 2021-08-27 15:08:33
  * @FilePath: \note\src\main\java\com\cloud\note\entity\Note.java
  */
 package com.cloud.note.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -25,4 +26,6 @@ public class Note {
     private String status;
     private String title;
     private String content;
+    @TableField(exist = false)
+    private String category_name;
 }

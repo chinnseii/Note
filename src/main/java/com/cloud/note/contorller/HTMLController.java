@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-15 16:24:23
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-24 15:43:12
+ * @LastEditTime: 2021-09-01 17:21:08
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\HTMLController.java
  */
 package com.cloud.note.contorller;
@@ -31,5 +31,9 @@ public class HTMLController {
     @RequestMapping("createNote")
     public String createNote() {
         return "createNote";   
+    }
+    @RequestMapping("editNote")
+    public String editNote() {
+        return "editNote";   
     }
 }

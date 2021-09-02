@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-24 17:39:04
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-25 14:43:00
+ * @LastEditTime: 2021-09-02 11:46:47
  * @FilePath: \note\src\main\resources\static\js\createNote.js
  */
 $(function () {
@@ -73,7 +73,7 @@ function uploadNote() {
     }else{
         jsonObject.status = "1";
     }
-    jsonObject.title = $("#title").val();
+    jsonObject.title = $("#title").val(); 
     jsonObject.content = $("#content").val();
     var jsonData = JSON.stringify(jsonObject);
     var res = javaService("/uploadNote", jsonData);

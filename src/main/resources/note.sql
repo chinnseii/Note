@@ -35,3 +35,17 @@ create table if not exists category(
     , update_date char (14) comment '更新时间'
     , status int (1) not null comment '是否公开'
 );
+
+drop table if exists note; 
+CREATE TABLE if not exists　note (
+  id int NOT NULL AUTO_INCREMENT COMMENT 'id',
+  user_mobile varchar(11) NOT NULL COMMENT '电话号码',
+  category_id int NOT NULL COMMENT '科目ID',
+  star char(10) DEFAULT NULL COMMENT '标星',
+  create_date char(14) NOT NULL COMMENT '创建日期',
+  update_date char(14) DEFAULT NULL COMMENT '更新日期',
+  status int NOT NULL COMMENT '状态',
+  title varchar(50) NOT NULL COMMENT '标题',
+  content varchar(5000) NOT NULL COMMENT '内容',
+  PRIMARY KEY (id)
+)
