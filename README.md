@@ -7,6 +7,5 @@
 本系统用于记录职场遇到过的问题以及当时的解决方案。
 免去反复查找的痛苦
 
-登录界面仿知乎，主页仿b站。
-技术栈：springboot mybatis mysql jquery
+springboot mybatis mysql jquery
 边敲边学习，学啥用啥。
