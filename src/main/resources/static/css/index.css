@@ -1223,3 +1223,7 @@ pre {
     white-space: -o-pre-wrap; /*Opera7*/ 
     word-wrap: break-word; /*InternetExplorer5.5+*/ 
     } 
+
+#level{
+    float: right;
+}

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-24 17:39:04
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-09-02 11:46:47
+ * @LastEditTime: 2021-09-08 15:34:35
  * @FilePath: \note\src\main\resources\static\js\createNote.js
  */
 $(function () {
@@ -9,9 +9,8 @@ $(function () {
     var jsonObject = new Object();
     jsonObject.userMobile = localStorage.getItem("userMobile");
     var jsonData = JSON.stringify(jsonObject);
-    var res = javaService("/getCategoryName", jsonData);
-    localStorage.setItem("jsonData", res);
-    var optionlist = JSON.parse(res);
+    var optionlist = javaService("/getCategoryName", jsonData);
+    localStorage.setItem("jsonData", JSON.stringify(optionlist));
     if (JSON.stringify(optionlist) !== '{}') {
         for (var temp in optionlist) {
             $("#subjectsList").append("<option>" + optionlist[temp] + "</option>");
@@ -77,20 +76,12 @@ function uploadNote() {
     jsonObject.content = $("#content").val();
     var jsonData = JSON.stringify(jsonObject);
     var res = javaService("/uploadNote", jsonData);
-    var result = JSON.parse(res);
-    if(result.result){
+    if(res.result){
         layx.msg('ノート作成成功', { dialogIcon: 'success' });
         layx.destroy('loadId');
         parent.location.reload();
     }
 }
-
-
-
-
-
-
-
 
 /**
  * @description: ajax调用JAVA接口(同步)
@@ -98,7 +89,7 @@ function uploadNote() {
  * @param {*} jsonData
  * @return {*}
  */
-function javaService(url, jsonData) {
+ function javaService(url, jsonData) {
     var headerObject = new Object();
     headerObject.token = localStorage.getItem("token");
     headerObject.userMobile = localStorage.getItem("userMobile");
@@ -114,11 +105,18 @@ function javaService(url, jsonData) {
         data: {
             'jsonData': jsonData
         },
-        success: function (result) {
-            res = result;
+        success: function (returnValue) {
+            if (typeof returnValue == "string") {
+                res = JSON.parse(returnValue);
+            } else {
+                res = returnValue;
+            }
+            if (res.errorCode != undefined) {
+                errorCode(res.errorCode);
+            }
         },
-        error: function () {
-            layx.msg('サーバー通信失敗しました。', { dialogIcon: 'error' });
+        error: function (error) {
+            errorCode(error.status);
         }
     });
     return res;

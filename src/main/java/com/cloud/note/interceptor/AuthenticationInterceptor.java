@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-27 16:57:06
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-05 16:30:07
+ * @LastEditTime: 2021-09-08 14:40:14
  * @FilePath: \note\src\main\java\com\cloud\note\interceptor\AuthenticationInterceptor.java
  */
 package com.cloud.note.interceptor;
@@ -64,7 +64,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     httpServletResponse.setCharacterEncoding("UTF-8");
                     httpServletResponse.setContentType("application/json; charset=utf-8");
                     httpServletResponse.sendRedirect("login");
-                    res.put("errorMsg", constant.getTOKEN_NULL_ERRORMSG());
+                    res.put("errorCode", 401);                   
                     log.info(constant.getTOKEN_NULL_ERRORMSG()+" IP:"+httpServletRequest.getRemoteAddr());
                     PrintWriter out = httpServletResponse.getWriter();
                     out.write(res.toString());
@@ -75,7 +75,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 if (!TokenUtil.checkToken(token, constant.getSecretkey(), userMobile)) {
                     httpServletResponse.setCharacterEncoding("UTF-8");
                     httpServletResponse.setContentType("application/json; charset=utf-8");
-                    res.put("errorMsg", constant.getTOKEN_CONFIRM_ERRORMSG());
+                    res.put("errorCode", 403);  
                     log.info("ユーザー:"+userMobile+" Token有効期限過ぎました IP:"+httpServletRequest.getRemoteAddr());
                     PrintWriter out = httpServletResponse.getWriter();
                     out.write(res.toString());

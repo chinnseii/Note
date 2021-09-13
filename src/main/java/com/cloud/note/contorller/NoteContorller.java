@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-25 13:34:49
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-09-02 15:19:03
+ * @LastEditTime: 2021-09-07 16:51:28
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\NoteContorller.java
  */
 package com.cloud.note.contorller;
@@ -77,7 +77,7 @@ public class NoteContorller {
             userMobile = deleteNote.getString("userMobile");
             String noteId=deleteNote.getString("id");
             log.info("ユーザー: " + userMobile + " ノート削除開始");
-            res = noteService.deleteNote(noteId);
+            res = noteService.deleteNote(userMobile,noteId);
             if(res.getBoolean("result")){
                 log.info("ユーザー: " + userMobile + " ノート削除成功");
             }       

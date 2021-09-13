@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-21 09:23:19
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-18 16:06:52
+ * @LastEditTime: 2021-09-07 18:09:08
  * @FilePath: \note\src\main\java\com\cloud\note\entity\UserInfo.java
  */
 package com.cloud.note.entity;
@@ -19,10 +19,14 @@ public class UserInfo {
     private String user_mobile;
     private String profile_photo;
     private String signature;
-    private String follow;
-    private String fan;
-    private String star;
-    private String user_level;
-    private String exp;
+    private int message;
+    private long note;
+    private long category;
+    private long follow;
+    private long fan;
+    private long starred;
+    private long star;
+    private int user_level;
+    private int exp;
     private String update_time;
 }

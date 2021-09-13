@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-25 13:45:17
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-09-02 13:38:35
+ * @LastEditTime: 2021-09-08 16:25:47
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\NoteServiceImpl.java
  */
 package com.cloud.note.service.impl;
@@ -14,8 +14,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cloud.note.dao.CategoryMapper;
 import com.cloud.note.dao.NoteMapper;
 import com.cloud.note.entity.Category;
+import com.cloud.note.entity.Constant;
 import com.cloud.note.entity.Note;
 import com.cloud.note.service.NoteService;
+import com.cloud.note.service.UserInfoService;
 import com.cloud.note.utils.StringUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,10 @@ public class NoteServiceImpl implements NoteService {
     private NoteMapper noteMapper;
     @Autowired
     private CategoryMapper categoryMapper;
+    @Autowired
+    private UserInfoService userInfoService;
+    @Autowired
+    private Constant constant;
 
     @Override
     /**
@@ -50,11 +56,12 @@ public class NoteServiceImpl implements NoteService {
         note.setUser_mobile(userMobile);
         note.setTitle(noteJson.getString("title"));
         note.setContent(noteJson.getString("content"));
-        if (noteMapper.insert(note) == 1) {
+        if (noteMapper.insert(note) == 1 && userInfoService.updateExp(userMobile,constant.getNEW_NOTE_EXP() )) {
+            userInfoService.updateUserNote(userMobile,true,1);
             res.put("result", true);
         } else {
             res.put("result", false);
-            res.put("errorMsg", "ノートアップロード失敗しました。");
+            res.put("errorCode", 505);
 
         }
         return res;
@@ -98,13 +105,15 @@ public class NoteServiceImpl implements NoteService {
      * @param {String} noteId
      * @return {*}
      */
-    public JSONObject deleteNote(String noteId) throws Exception {
+    public JSONObject deleteNote(String userMobile,String noteId) throws Exception {
         JSONObject res = new JSONObject();
         int a = noteMapper.deleteById(noteId);
         res.put("result", true);
         if (a != 1) {
             res.put("result", false);
-            res.put("errorMsg", "サーバー異常、ノート削除失敗しました。");
+            res.put("errorCode",504);
+        }else{
+            userInfoService.reduceExp(userMobile, constant.getNEW_NOTE_EXP());
         }
         return res;
     }
@@ -142,7 +151,7 @@ public class NoteServiceImpl implements NoteService {
         note.setStatus(updateNote.getString("status"));
         note.setUpdate_date(StringUtil.getTimeHMS());
         note.setId(updateNote.getString("id"));
-        JSONObject res= new JSONObject();
+        JSONObject res = new JSONObject();
         res.put("result", true);
         if (noteMapper.updateById(note) != 1) {
             res.put("result", false);

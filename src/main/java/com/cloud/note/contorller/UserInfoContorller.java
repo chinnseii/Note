@@ -1,13 +1,15 @@
 /*
  * @Date: 2021-07-21 09:49:05
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-23 10:14:17
+ * @LastEditTime: 2021-09-10 23:55:57
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\UserInfoContorller.java
  */
 package com.cloud.note.contorller;
 
+import com.alibaba.fastjson.JSON;
 import com.cloud.note.annotation.TokenCheck;
 import com.cloud.note.entity.UserInfo;
+import com.cloud.note.service.LevelMasterService;
 import com.cloud.note.service.UserInfoService;
 import com.cloud.note.utils.StringUtil;
 
@@ -28,6 +30,9 @@ public class UserInfoContorller {
   @Autowired
   private UserInfoService userInfoService;
 
+  @Autowired
+  private LevelMasterService levelMasterService;
+
   public int initUserInfo(String userMobile) {
     return userInfoService.initUserInfo(userMobile);
   }
@@ -36,11 +41,25 @@ public class UserInfoContorller {
   @TokenCheck
   @ResponseBody
   @PostMapping(value = "/getUserInfo")
-  public UserInfo getUserInfo(@RequestParam("userMobile") String mobile) {
+  public String getUserInfo(@RequestParam("userMobile") String mobile) throws JSONException{
     log.info("ユーザー:" + mobile + " 個人情報取得開始");
-    UserInfo userInfo = userInfoService.getUserInfo(mobile);
-    log.info("ユーザー:" + mobile + " 個人情報取得成功");
-    return userInfo;
+    JSONObject res=new JSONObject();
+    try {
+      UserInfo userInfo = userInfoService.getUserInfo(mobile);
+      // 获取当前等级升级所需经验值
+      res = new JSONObject(JSON.toJSONString(userInfo));
+      Double levelUpExp = levelMasterService.getExp(String.valueOf(userInfo.getUser_level()));
+      Double process = Double.valueOf(userInfo.getExp()) / levelUpExp + Double.valueOf(userInfo.getUser_level());
+      res.put("user_level", process);
+
+
+      log.info("ユーザー:" + mobile + " 個人情報取得成功");
+    } catch (JSONException e) {
+      res.put("errorCode",500);
+      log.error("ユーザー:" + mobile + " 個人情報取得失敗");
+      e.printStackTrace();
+    }    
+    return res.toString();
   }
 
   @TokenCheck
@@ -94,12 +113,12 @@ public class UserInfoContorller {
       avatar.put("updatetime", StringUtil.getTimeToday());
       // 古いアバターの情報を取得
       UserInfo userInfo = userInfoService.getUserInfo(userMobile);
-     if(userInfo==null){
-      return res.toString();
-     }
-      res=userInfoService.updateUserProfilePhoto(userInfo,avatar,multipartFile);
+      if (userInfo == null) {
+        return res.toString();
+      }
+      res = userInfoService.updateUserProfilePhoto(userInfo, avatar, multipartFile);
     } catch (Exception e) {
-      log.error("ユーザー:" + userMobile + " アバター更新失敗しました"+e.getMessage());
+      log.error("ユーザー:" + userMobile + " アバター更新失敗しました" + e.getMessage());
       e.printStackTrace();
     }
     return res.toString();

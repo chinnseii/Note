@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-18 17:07:02
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-24 14:50:16
+ * @LastEditTime: 2021-09-08 17:07:51
  * @FilePath: \note\src\main\java\com\cloud\note\service\impl\CategoryServiceImpl.java
  */
 package com.cloud.note.service.impl;
@@ -12,8 +12,8 @@ import java.util.List;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cloud.note.dao.CategoryMapper;
 import com.cloud.note.entity.Category;
-import com.cloud.note.entity.Constant;
 import com.cloud.note.service.CategoryService;
+import com.cloud.note.service.UserInfoService;
 import com.cloud.note.utils.StringUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +25,19 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
     @Autowired
-    private Constant constant;
+    private UserInfoService userInfoService;
 
     @Override
     public JSONObject createCategory(String mobile, String categoryName, String status) throws Exception {
         JSONObject res = new JSONObject();
         res.put("result", false);
         if(categoryName.length()>50){
-            res.put("errorMsg", "科目名が50文字以下に設定してください。"); 
+            res.put("errorCode", 501); 
             return res;
         }
         QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
         if (categoryMapper.selectCount(queryWrapper.eq("user_mobile", mobile).eq("category_name", categoryName.trim())) != 0) {
-            res.put("errorMsg", constant.getCATEGORY_EXIST_ERRORMSG()); 
+            res.put("errorCode",502); 
             return res;
         }
         Category category = new Category();
@@ -47,6 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setCategory_name(categoryName);
         category.setStatus(status);
         if(categoryMapper.insert(category)==1){
+            userInfoService.updateUserCategory(mobile,true,1);
             res.put("result", true);
         }
         return res;
@@ -61,7 +62,6 @@ public class CategoryServiceImpl implements CategoryService {
         category.setUser_mobile(mobile);
         category.setUpdate_date(StringUtil.getTimeHMS());
         categoryMapper.updateById(category);
-
         return null;
     }
 

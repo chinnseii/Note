@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-18 16:59:39
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-24 14:38:06
+ * @LastEditTime: 2021-09-08 15:43:30
  * @FilePath: \note\src\main\java\com\cloud\note\contorller\CategoryController.java
  */
 package com.cloud.note.contorller;
@@ -34,7 +34,7 @@ public class CategoryController {
         try {
             res = categoryService.createCategory(mobile, categoryName, status);
             if (!res.getBoolean("result")) {
-                log.error("ユーザー: " + mobile + " 科目 「" + categoryName + "」 作成失敗 : " + res.getString("errorMsg"));
+                log.error("ユーザー: " + mobile + " 科目 「" + categoryName + "」 作成失敗 : " + res.getString("errorCode"));
                 return res.toString();
             }
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class CategoryController {
         try {
             res = categoryService.updateCategory(mobile, categoryName, status);
             if (!res.getBoolean("result")) {
-                log.error("ユーザー: " + mobile + " 科目 「" + categoryName + "」 作成失敗 : " + res.getString("errorMsg"));
+                log.error("ユーザー: " + mobile + " 科目 「" + categoryName + "」 作成失敗 : " + res.getString("errorCode"));
                 return res.toString();
             }
         } catch (Exception e) {

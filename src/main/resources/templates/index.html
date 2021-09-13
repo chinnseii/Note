@@ -25,8 +25,8 @@
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active" onclick="getNote('0', '0')"><a href="#">公開</a></li>
                 <li role="presentation"><a href="#" onclick="getNote('0', '1')">私有</a></li>
-              </ul>
-            <div class="mcl_topvideo" id="noteView">                        
+            </ul>
+            <div class="mcl_topvideo" id="noteView">
             </div>
             <button type="button" id="createCategory" class="btn btn-primary">科目作成</button>
             <button type="button" id="createNote" class="btn btn-primary" onclick="createNote()">ノート作成</button>
@@ -41,107 +41,28 @@
     crossorigin="anonymous"></script>
 <script src="/libs/Layx/layx.min.js"></script>
 <script src="/js/index.js"></script>
+<script src="/js/errorCode.js"></script>
 <script>
-    $(function () {
-        if ("[[${token}]]".length != 0) {
-            localStorage.setItem("token", "[[${token}]]");
-        }
-        if ("[[${userMobile}]]".length != 0) {
-            localStorage.setItem("userMobile", "[[${userMobile}]]");
-        }
-        if ("[[${nickName}]]".length != 0) {
-            localStorage.setItem("nickName", "[[${nickName}]]");
-        }
-        if ($("#nickName").text() == 0) {
-            $(".nickName").append(localStorage.getItem("nickName"));
-            $(document).attr("title", localStorage.getItem("nickName"));
-        }
-        if (localStorage.getItem("token") == undefined || localStorage.getItem("userMobile") == undefined) {
-            window.location.href = "login";
-        } else {
-            var headerObject = new Object();
-            headerObject.token = localStorage.getItem("token");
-            headerObject.userMobile = localStorage.getItem("userMobile");
-            var headerInfo = JSON.stringify(headerObject);
-            $.ajax({
-                type: "POST",
-                url: "/getUserInfo",
-                beforeSend: function (request) {
-                    request.setRequestHeader("header", headerInfo);
-                },
-                data: {
-                    'userMobile': localStorage.getItem("userMobile"),
-                },
-                success: function (result) {
-                    if (result.errorMsg != undefined) {
-                        window.location.href = "login?errorMsg=" + result.errorMsg;
-                    } else {
-                        $("#fan").append(result.fan);
-                        $("#follow").append(result.follow);
-                        $("#star").append(result.star);
-                        $("#level").append(result.user_level);
-                        localStorage.setItem("signature", result.signature);
-                        $("#signature").val(result.signature);
-                        localStorage.setItem("profilephotoPath", "profilephoto/" + result.profile_photo);
-                        $(".profilephoto").attr("src", localStorage.getItem("profilephotoPath"));
-                    }
-                },
-                error: function () {
-                    layx.msg('サーバー異常、ユーザー情報取得失敗', { dialogIcon: 'error' });
-                }
-            });
-            getNote("0", "0");
-        }
-        $("#createCategory").click(function () {
-            layx.prompt('科目作成', '科目名を入力してください。', function (id, value, textarea, button, event) {
-                layx.confirm('', '科目: ' + value + ' 公開しますか？', null, {
-                    buttons: [
-                        {
-                            label: 'はい',
-                            callback: function (id, button, event) {
-                                createCategory(value, 0);
-                                layx.destroy(id);
-                            }
-                        },
-                        {
-                            label: 'いええ',
-                            callback: function (id, button, event) {
-                                createCategory(value, 1);
-                                layx.destroy(id);
-                            }
-                        }
-                    ]
-                });
-            });
-        });
-        $("#signature").blur(function () {
-            if (localStorage.getItem("signature") != $("#signature").val()) {
-                $.ajax({
-                    type: "POST",
-                    url: "/updateUserSignature",
-                    beforeSend: function (request) {
-                        request.setRequestHeader("header", headerInfo);
-                    },
-                    data: {
-                        'userMobile': localStorage.getItem("userMobile"),
-                        'signature': $("#signature").val()
-                    },
-                    success: function (result) {
-                        var json = JSON.parse(result);
-                        if (!json.res) {
-                            layx.msg('個人説明更新失敗しました、も一度更新してください。', { dialogIcon: 'error' });
-                        } else {
-                            localStorage.setItem("signature", $("#signature").val());
-                            layx.alert('個人説明更新', '個人説明更新成功', null, { dialogIcon: 'success' });
-                        }
-                    },
-                    error: function (result) {
-                        layx.msg('個人説明更新失敗しました、も一度更新してください。', { dialogIcon: 'error' });
-                    }
-                });
-            }
-        });
-    })
+$(function () {
+    if ("[[${token}]]".length != 0) {
+        localStorage.setItem("token", "[[${token}]]");
+    }
+    if ("[[${userMobile}]]".length != 0) {
+        localStorage.setItem("userMobile", "[[${userMobile}]]");
+    }
+    if ("[[${nickName}]]".length != 0) {
+        localStorage.setItem("nickName", "[[${nickName}]]");
+    }
+    if ($("#nickName").text() == 0) {
+        $(".nickName").append(localStorage.getItem("nickName"));
+        $(document).attr("title", localStorage.getItem("nickName"));
+    }
+    if (localStorage.getItem("token") == undefined || localStorage.getItem("userMobile") == undefined) {
+        window.location.href = "login";
+    } else {
+        initIndex();
+    }
+})
 </script>
 
 </html>

@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-07-28 14:18:58
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-08-18 17:50:48
+ * @LastEditTime: 2021-09-03 18:06:15
  * @FilePath: \note\src\main\java\com\cloud\note\entity\Constant.java
  */
 package com.cloud.note.entity;
@@ -35,5 +35,5 @@ public class Constant {
     private String AVATAR_PATH;
     private String INIT_AVATAR_NAME;
     private String CATEGORY_EXIST_ERRORMSG;
-
+    private int NEW_NOTE_EXP;
 }
