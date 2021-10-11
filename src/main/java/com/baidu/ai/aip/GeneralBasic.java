@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-09-09 17:55:02
  * @LastEditors: CHEN SHENGWEI
- * @LastEditTime: 2021-09-13 09:25:59
+ * @LastEditTime: 2021-09-13 17:11:34
  * @FilePath: \note\src\main\java\com\baidu\ai\aip\GeneralBasic.java
  */
 
@@ -11,8 +11,6 @@ import com.baidu.ai.aip.utils.AuthService;
 import com.baidu.ai.aip.utils.Base64Util;
 import com.baidu.ai.aip.utils.FileUtil;
 import com.baidu.ai.aip.utils.HttpUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,7 +35,7 @@ public class GeneralBasic {
         String url = "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic";
         try {
             // 本地文件路径
-            String filePath = "C:\\Users\\BP-chenshengwei\\Desktop\\微信图片_20210909092631.jpg";
+            String filePath = "C:\\Users\\BP-chenshengwei\\Desktop\\微信图片_20210913170407.jpg";
             byte[] imgData = FileUtil.readFileByBytes(filePath);
             String imgStr = Base64Util.encode(imgData);
             String imgParam = URLEncoder.encode(imgStr, "UTF-8");
