@@ -1,0 +1,87 @@
+{
+  "groups": [
+    {
+      "name": "constant",
+      "type": "com.cloud.note.entity.Constant",
+      "sourceType": "com.cloud.note.entity.Constant"
+    }
+  ],
+  "properties": [
+    {
+      "name": "constant.a-c-c-o-u-n-t-i-n-i-t-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.a-c-c-o-u-n-t-l-o-g-k-e-d-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.a-v-a-t-a-r-p-a-t-h",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.c-a-t-e-g-o-r-y-e-x-i-s-t-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.expire",
+      "type": "java.lang.Long",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.i-n-i-t-a-v-a-t-a-r-n-a-m-e",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.m-o-b-i-l-e-e-x-i-s-t-i-n-c-o-r-r-e-c-t-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.m-o-b-i-l-e-n-u-l-l-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.m-o-b-i-l-e-o-r-p-a-s-s-w-o-r-d-i-n-c-o-r-r-e-c-t-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.m-o-b-i-l-e-o-r-p-a-s-s-w-o-r-d-n-u-l-l-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.n-e-w-n-o-t-e-e-x-p",
+      "type": "java.lang.Integer",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.r-e-g-i-s-t-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.secretkey",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.t-o-k-e-n-c-o-n-f-i-r-m-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    },
+    {
+      "name": "constant.t-o-k-e-n-n-u-l-l-e-r-r-o-r-m-s-g",
+      "type": "java.lang.String",
+      "sourceType": "com.cloud.note.entity.Constant"
+    }
+  ],
+  "hints": []
+}
